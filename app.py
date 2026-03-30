@@ -4,6 +4,23 @@ from datetime import datetime
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({
+        "name": "Task Management REST API",
+        "version": "1.0",
+        "status": "running",
+        "endpoints": {
+            "health":  "GET    /health",
+            "tasks":   "GET    /tasks",
+            "create":  "POST   /tasks",
+            "get_one": "GET    /tasks/<id>",
+            "update":  "PUT    /tasks/<id>",
+            "delete":  "DELETE /tasks/<id>"
+        },
+        "docs": "github.com/dhruvkumargrow-cyber/task-manager-backend"
+    }), 200
+
 # ── GET all tasks ──────────────────────────────────────
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
